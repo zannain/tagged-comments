@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { CommentFormService } from '../service/comment-form.service';
 import { CommentService } from '../services/comment.service';
 import { User } from '../../models/user.model';
+import { CommentFormService } from '../services/comment-form.service';
 
 @Component({
   selector: 'comment-form',

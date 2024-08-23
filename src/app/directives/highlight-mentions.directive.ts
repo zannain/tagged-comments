@@ -18,7 +18,6 @@ export class HighlightMentionsDirective {
   }
 
   private highlightMentions(): void {
-    console.log(this.mentionedUsers)
     // Parse the input string and replace mentions with bold tags
     const mentionRegex = /(@\w+)/g;
     // Replace each mention with a bold tag if the user is mentioned

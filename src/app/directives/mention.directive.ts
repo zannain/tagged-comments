@@ -11,29 +11,29 @@ export class MentionDirective implements OnInit, OnChanges, OnDestroy {
   @Output() selectItem: EventEmitter<{ [key: string]: string }> = new EventEmitter();
 
   private nativeEle: HTMLTextAreaElement;
-  private input$: Subscription;
+  //private input$: Subscription;
   private dropdownList: ComponentRef<MentionDropdownComponent> | null = null;
   constructor(private ele: ElementRef<HTMLTextAreaElement>, private readonly viewContainerRef: ViewContainerRef, private renderer: Renderer2, private componentFactoryResolver: ComponentFactoryResolver) {
     this.nativeEle = this.ele.nativeElement;
-    // Listen for any changes
-    this.input$ = fromEvent(this.nativeEle, 'input').subscribe(() => {
-      const textarea = this.nativeEle;
-      const cursorPosition = textarea.selectionStart;
-      const text = textarea.value.substring(0, cursorPosition);
-
-      const mentionIndex = text.lastIndexOf('@');
-      if (mentionIndex > -1) {
-        const query = text.substring(mentionIndex + 1);
-        if (query.length > 0) {
-          this.showDropdown(query, mentionIndex);
-        } else {
-          this.hideDropdown();
-        }
-      } else {
-        this.hideDropdown();
-
-      }
-    })
+    //// Listen for any changes
+    //this.input$ = fromEvent(this.nativeEle, 'input').subscribe(() => {
+    //  const textarea = this.nativeEle;
+    //  const cursorPosition = textarea.selectionStart;
+    //  const text = textarea.value.substring(0, cursorPosition);
+    //
+    //  const mentionIndex = text.lastIndexOf('@');
+    //  if (mentionIndex > -1) {
+    //    const query = text.substring(mentionIndex + 1);
+    //    if (query.length > 0) {
+    //      this.showDropdown(query, mentionIndex);
+    //    } else {
+    //      this.hideDropdown();
+    //    }
+    //  } else {
+    //    this.hideDropdown();
+    //
+    //  }
+    //})
   }
   ngOnInit(): void {
 
@@ -42,9 +42,25 @@ export class MentionDirective implements OnInit, OnChanges, OnDestroy {
 
   }
   ngOnDestroy(): void {
-    this.input$.unsubscribe()
+    //this.input$.unsubscribe()
   }
+  @HostListener('input', ['$event']) onInput(event: KeyboardEvent): void {
+    const textarea = this.ele.nativeElement as HTMLTextAreaElement;
+    const cursorPosition = textarea.selectionStart;
+    const text = textarea.value.substring(0, cursorPosition);
 
+    const mentionIndex = text.lastIndexOf('@');
+    if (mentionIndex > -1) {
+      const query = text.substring(mentionIndex + 1);
+      if (query.length > 0) {
+        this.showDropdown(query, mentionIndex);
+      } else {
+        this.hideDropdown();
+      }
+    } else {
+      this.hideDropdown();
+    }
+  }
   @HostListener('keydown', ['$event']) onKeydown(event: KeyboardEvent): void {
     if (this.dropdownList) {
       const dropdownInstance = this.dropdownList.instance;

@@ -6,7 +6,7 @@ import { Comment } from '../../models/comment.model';
   providedIn: 'root'
 })
 export class CommentService {
-  private comments: Comment[] = [];
+  private comments: Comment[] = [{ id: 0, content: 'Hello World', createdAt: new Date(), mentionedUsers: [] }];
   private users: User[] = [
     { userID: 1, name: 'Zannain' },
     { userID: 2, name: 'Uswa' },

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Comment } from '../../models/comment.model';
 
 @Component({
   selector: 'comment',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './comment.component.css'
 })
 export class CommentComponent {
-
+  @Input() comment: Comment | null = null;
+  // NOTE: Since there is no auth every comment is made by the System user
+  loggedInUser: string = "System"
 }

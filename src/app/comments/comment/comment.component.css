@@ -1,0 +1,16 @@
+.comment-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.comment-item--content {
+  font-size: 14px;
+}
+
+.comment-item--date {
+  color: var(--gray-400);
+  font-size: 12px;
+}

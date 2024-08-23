@@ -6,9 +6,9 @@ import { CommentsListComponent } from './comments-list/comments-list.component';
 import { CommentsComponent } from './comments.component';
 import { CommentService } from './services/comment.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommentFormService } from './service/comment-form.service';
 import { HighlightMentionsDirective } from '../directives/highlight-mentions.directive';
 import { MentionDirective } from '../directives/mention.directive';
+import { CommentFormService } from './services/comment-form.service';
 
 
 
