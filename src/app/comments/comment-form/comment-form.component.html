@@ -1,0 +1,4 @@
+<div class="form-wrapper" [formGroup]="commentForm">
+  <textarea placeholder="Write a comment..." formControlName="commentText" mentionDropdown [items]="getUsers()"></textarea>
+  <button (click)="addComment()">Submit</button>
+</div>

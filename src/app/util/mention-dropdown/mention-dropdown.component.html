@@ -1,0 +1,7 @@
+<div class="dropdown">
+  <div *ngFor="let user of filteredData; let i = index"
+     [class.active]="i === activeIndex"
+    (mouseover)="activeIndex = i">
+    {{ user['name'] }}
+      </div>
+    </div>
