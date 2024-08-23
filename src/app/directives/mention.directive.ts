@@ -62,7 +62,11 @@ export class MentionDirective implements OnInit, OnChanges, OnDestroy {
       }
     }
   }
-
+  @HostListener('document:click', ['$event']) onClickOutside(event: MouseEvent): void {
+    if (this.dropdownList) {
+      this.hideDropdown();
+    }
+  }
   private selectUser(userName: string): void {
     const textarea = this.ele.nativeElement as HTMLTextAreaElement;
     const cursorPosition = textarea.selectionStart;
