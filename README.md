@@ -26,6 +26,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 - [ ] Improve the accessibility of the dropdown
 
 
-## Sketch
+## Prototype Sketch
 
 ![Alt text](prototype-sketch.png)
