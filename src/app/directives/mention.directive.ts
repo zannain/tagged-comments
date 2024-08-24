@@ -70,7 +70,7 @@ export class MentionDirective {
       this.dropdownList = this.viewContainerRef.createComponent(factory)
       this.dropdownList.instance.data = this.items;
       this.dropdownList.instance.userSelected.subscribe((userName: string) => {
-        console.log(userName)
+        this.selectUser(userName);
       });
       this.renderer.appendChild(document.body, this.dropdownList.location.nativeElement);
     }

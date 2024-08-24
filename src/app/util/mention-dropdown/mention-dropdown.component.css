@@ -4,6 +4,7 @@
       position: absolute;
       z-index: 1000;
       width: 200px;
+      border-radius: 8px;
     }
 
     .dropdown div {
@@ -12,6 +13,7 @@
     }
 
     .dropdown div.active {
-      background-color: #007bff;
-      color: #fff;
+      background-color: oklch(70.9% 0.015 304.04);
+      border-radius: inherit;
+      color: white;
     }
