@@ -20,7 +20,7 @@ export class MentionDirective {
     const mentionIndex = text.lastIndexOf('@');
     if (mentionIndex > -1) {
       const query = text.substring(mentionIndex + 1);
-      if (query.length > 0) {
+      if (query.length >= 0) {
         this.showDropdown(query, mentionIndex);
       } else {
         this.hideDropdown();

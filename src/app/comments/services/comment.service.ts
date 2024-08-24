@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user.model';
 import { Comment } from '../../models/comment.model';
-import { users } from '../../data/users';
-
+import { getUsers } from '../../data/users';
+import { comments } from '../../data/comments';
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
-  private comments: Comment[] = [{ id: 0, content: 'Hello World', createdAt: new Date(), mentionedUsers: [] }];
+  private comments: Comment[] = [...comments];
   private users: User[] = [];
   constructor() {
-    this.users = users
+    this.users = getUsers()
   }
   addComment(commentText: string): void {
     const mentionedUsers = this.detectMentionedUsers(commentText)

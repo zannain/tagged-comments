@@ -1,4 +1,7 @@
 <li class="comment-item">
-  <div class="comment-item--content" [highlightMention]="comment?.content || ''" [mentionedUsers]="comment?.mentionedUsers"></div>
+  <div class="comment-item--content">
+    <img src="bubble.svg" alt="comment icon" />
+    <span [highlightMention]="comment?.content || ''" [mentionedUsers]="comment?.mentionedUsers"></span>
+  </div>
   <div class="comment-item--date">{{loggedInUser}} - {{ comment?.createdAt | date:'yyyy/MM/dd hh:mm a' }}</div>
 </li>

@@ -1,19 +1,13 @@
 import { User } from "../models/user.model";
 
-export function generateUsers(count: number): User[] {
-  const names = [
-    'John', 'Mark', 'Bryan', 'Gabbey', 'Gabe',
-    'Alice', 'Bob', 'Charlie', 'Diana', 'Eve',
-    'Frank', 'Grace', 'Heidi', 'Ivan', 'Judy',
-    'Mallory', 'Niaj', 'Olivia', 'Peggy', 'Walter'
+export function getUsers(): User[] {
+  const users: User[] = [
+    { userID: 1, name: 'Luke' },
+    { userID: 2, name: 'Darth' },
+    { userID: 3, name: 'Leia' },
+    { userID: 4, name: 'Han' },
+    { userID: 5, name: 'Yoda' },
   ];
-
-  return Array.from({ length: count }, (_, index) => {
-    return {
-      userID: index + 1,
-      name: names[index % names.length] // Reuse names if count exceeds names length
-    };
-  });
+  return users;
 }
 
-export const users = generateUsers(20);

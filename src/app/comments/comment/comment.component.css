@@ -8,9 +8,15 @@
 
 .comment-item--content {
   font-size: 14px;
+  display: flex;
+  gap: 8px;
 }
 
 .comment-item--date {
   color: var(--gray-400);
   font-size: 12px;
+}
+
+img {
+  height: 24px;
 }
