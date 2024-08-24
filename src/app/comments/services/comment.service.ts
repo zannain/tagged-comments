@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user.model';
 import { Comment } from '../../models/comment.model';
+import { users } from '../../data/users';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
   private comments: Comment[] = [{ id: 0, content: 'Hello World', createdAt: new Date(), mentionedUsers: [] }];
-  private users: User[] = [
-    { userID: 1, name: 'Zannain' },
-    { userID: 2, name: 'Uswa' },
-    { userID: 3, name: 'Bryan' },
-    { userID: 4, name: 'Gabbey' },
-    { userID: 5, name: 'Gabe' },
-  ];
-  constructor() { }
+  private users: User[] = [];
+  constructor() {
+    this.users = users
+  }
   addComment(commentText: string): void {
     const mentionedUsers = this.detectMentionedUsers(commentText)
     const newComment: Comment = {
