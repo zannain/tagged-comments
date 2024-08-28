@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user.model';
 import { Comment } from '../../models/comment.model';
-import { getUsers } from '../../data/users';
 import { comments } from '../../data/comments';
+import { UserService } from '../../services/user.service';
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
   private comments: Comment[] = [...comments];
   private users: User[] = [];
-  constructor() {
-    this.users = getUsers()
+  constructor(private userService: UserService) {
   }
   addComment(commentText: string): void {
     const mentionedUsers = this.detectMentionedUsers(commentText)
@@ -30,7 +29,8 @@ export class CommentService {
   }
   private detectMentionedUsers(content: string): User[] {
     const mentionedUsers: User[] = [];
-    this.users.forEach(user => {
+    const users = this.userService.getUsers();
+    users.forEach(user => {
       if (content.includes(`@${user.name}`)) {
         mentionedUsers.push(user);
       }
