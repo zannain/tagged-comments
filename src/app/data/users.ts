@@ -11,3 +11,8 @@ export function getUsers(): User[] {
   return users;
 }
 
+export const defaultAuthor: User = {
+  userID: 0,
+  name: 'Baby Yoda'
+}
+

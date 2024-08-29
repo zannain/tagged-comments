@@ -32,7 +32,7 @@ export class HighlightMentionsDirective {
       }
 
       // If mentioned, return the bolded version, else return the original match
-      return isMentioned ? `<b>${match}</b>` : match;
+      return isMentioned ? `<b class="highlight">${match}</b>` : match;
     });
     // Set the HTML content of the element
     this.renderer.setProperty(this.el.nativeElement, 'innerHTML', parsedText);

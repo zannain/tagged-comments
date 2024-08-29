@@ -14,7 +14,7 @@
     }
 
     .dropdown div.active {
-      background-color: oklch(70.9% 0.015 304.04);
+      background-color: var(--yellow);
       border-radius: inherit;
       color: white;
     }

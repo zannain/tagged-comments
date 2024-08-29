@@ -3,6 +3,7 @@
   --new-orange: #F29422;
   --new-blue: #001939;
   --new-green: #289E49;
+  --yellow: #F29422;
   --gray-900: oklch(19.37% 0.006 300.98);
   --gray-700: oklch(36.98% 0.014 302.71);
   --gray-400: oklch(70.9% 0.015 304.04);
@@ -57,4 +58,8 @@ textarea {
   background-color: white;
   color: var(--new-green);
   border-color: var(--new-green);
+}
+
+.highlight {
+  color: var(--yellow);
 }

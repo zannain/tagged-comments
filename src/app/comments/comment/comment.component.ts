@@ -8,6 +8,4 @@ import { Comment } from '../../models/comment.model';
 })
 export class CommentComponent {
   @Input() comment: Comment | null = null;
-  // NOTE: Since there is no auth every comment is made by the System user
-  loggedInUser: string = "Baby Yoda"
 }

@@ -3,6 +3,7 @@ import { User } from '../../models/user.model';
 import { Comment } from '../../models/comment.model';
 import { comments } from '../../data/comments';
 import { UserService } from '../../services/user.service';
+import { defaultAuthor } from '../../data/users';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +17,7 @@ export class CommentService {
       id: this.comments.length + 1,
       content: commentText,
       createdAt: new Date(),
+      author: defaultAuthor,
       mentionedUsers,
     }
     this.comments.push(newComment);

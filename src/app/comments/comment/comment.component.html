@@ -3,5 +3,5 @@
     <img src="speech-bubble.png" alt="comment icon" />
     <span [highlightMention]="comment?.content || ''" [mentionedUsers]="comment?.mentionedUsers"></span>
   </div>
-  <div class="comment-item--date">{{loggedInUser}} - {{ comment?.createdAt | date:'yyyy/MM/dd hh:mm a' }}</div>
+  <div class="comment-item--date">{{comment?.author?.name}} - {{ comment?.createdAt | date:'yyyy/MM/dd hh:mm a' }}</div>
 </li>
