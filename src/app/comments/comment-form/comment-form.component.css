@@ -2,13 +2,3 @@
   display: flex;
   gap: 8px;
 }
-
-
-img {
-  height: 16px;
-  width: 16px;
-}
-
-textarea {
-  width: 50%;
-}

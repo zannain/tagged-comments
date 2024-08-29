@@ -6,7 +6,7 @@ import { CommentsListComponent } from './comments-list/comments-list.component';
 import { CommentsComponent } from './comments.component';
 import { CommentService } from './services/comment.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HighlightMentionsDirective } from '../directives/highlight-mentions.directive';
+import { DefaultMentionHighlighter, HighlightMentionsDirective } from '../directives/highlight-mentions.directive';
 import { MentionDirective } from '../directives/mention.directive';
 import { CommentFormService } from './services/comment-form.service';
 
@@ -14,7 +14,7 @@ import { CommentFormService } from './services/comment-form.service';
 
 @NgModule({
   declarations: [CommentFormComponent, CommentsComponent, CommentComponent, CommentsListComponent],
-  providers: [CommentService, CommentFormService],
+  providers: [CommentService, CommentFormService, { provide: 'MentionHighlighter', useClass: DefaultMentionHighlighter }],
   imports: [
     MentionDirective,
     HighlightMentionsDirective,
