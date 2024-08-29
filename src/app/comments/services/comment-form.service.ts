@@ -14,6 +14,9 @@ export class CommentFormService {
     return form.valid;
   }
 
+  updateComment(user: string): void {
+
+  }
   getCommentText(form: FormGroup): string {
     return form.get('commentText')?.value;
   }

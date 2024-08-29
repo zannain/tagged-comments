@@ -8,4 +8,5 @@ import { Comment } from '../../models/comment.model';
 })
 export class CommentComponent {
   @Input() comment: Comment | null = null;
+
 }

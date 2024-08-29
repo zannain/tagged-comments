@@ -17,12 +17,14 @@ export class CommentFormComponent {
 
     this.commentForm = this.commentFormService.createCommentForm()
   }
+
   getUsers(): User[] {
     return this.userService.getUsers();
   }
   addComment() {
     if (this.commentFormService.isFormValid(this.commentForm)) {
       const commentText = this.commentFormService.getCommentText(this.commentForm);
+      console.log(commentText)
       this.commentService.addComment(commentText);
       this.commentFormService.resetForm(this.commentForm);
     }

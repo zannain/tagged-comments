@@ -58,11 +58,12 @@ export class MentionDirective {
     const textBeforeCursor = textarea.value.substring(0, cursorPosition);
     const mentionIndex = textBeforeCursor.lastIndexOf('@');
     const textAfterCursor = textarea.value.substring(cursorPosition);
-
-    textarea.value = textBeforeCursor.substring(0, mentionIndex + 1) + userName + textAfterCursor;
+    const newValue = textBeforeCursor.substring(0, mentionIndex + 1) + userName + textAfterCursor;
+    textarea.value = newValue;
     this.renderer.selectRootElement(textarea).focus();
     textarea.setSelectionRange(mentionIndex + userName.length + 1, mentionIndex + userName.length + 1);
-
+    const inputEvent = new Event('input', { bubbles: true, cancelable: true });
+    textarea.dispatchEvent(inputEvent);
     this.hideDropdown();
   }
   private showDropdown(query: string): void {

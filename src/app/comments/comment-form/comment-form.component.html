@@ -1,5 +1,5 @@
 <div class="form-wrapper" [formGroup]="commentForm">
-  <textarea placeholder="Add a comment..." formControlName="commentText" mentionDropdown [items]="getUsers()"></textarea>
+  <textarea  placeholder="Add a comment..." formControlName="commentText" mentionDropdown [items]="getUsers()"></textarea>
   <button class="primary-btn" (click)="addComment()">
     <img src="bubble.svg" alt="comment icon" />
     Add Comment</button>
