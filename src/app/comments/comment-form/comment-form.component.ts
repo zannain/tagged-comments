@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { CommentService } from '../services/comment.service';
 import { User } from '../../models/user.model';
 import { CommentFormService } from '../services/comment-form.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'comment-form',
@@ -12,12 +13,12 @@ import { CommentFormService } from '../services/comment-form.service';
 export class CommentFormComponent {
   commentForm: FormGroup;
 
-  constructor(private readonly commentService: CommentService, private readonly commentFormService: CommentFormService) {
+  constructor(private readonly commentService: CommentService, private readonly commentFormService: CommentFormService, private readonly userService: UserService) {
 
     this.commentForm = this.commentFormService.createCommentForm()
   }
   getUsers(): User[] {
-    return this.commentService.getUsers();
+    return this.userService.getUsers();
   }
   addComment() {
     if (this.commentFormService.isFormValid(this.commentForm)) {

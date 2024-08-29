@@ -8,7 +8,6 @@ import { UserService } from '../../services/user.service';
 })
 export class CommentService {
   private comments: Comment[] = [...comments];
-  private users: User[] = [];
   constructor(private userService: UserService) {
   }
   addComment(commentText: string): void {
@@ -23,9 +22,6 @@ export class CommentService {
   }
   getComments(): Comment[] {
     return this.comments
-  }
-  getUsers(): User[] {
-    return this.users;
   }
   private detectMentionedUsers(content: string): User[] {
     const mentionedUsers: User[] = [];

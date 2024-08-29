@@ -1,1 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --new-orange: #F29422;
+  --new-blue: #001939;
+  --new-green: #289E49;
+  --gray-900: oklch(19.37% 0.006 300.98);
+  --gray-700: oklch(36.98% 0.014 302.71);
+  --gray-400: oklch(70.9% 0.015 304.04);
+
+}
+
+@font-face {
+  font-family: 'PrimaryCustomFont';
+  font-display: swap;
+  src: url('assets/Metropolis-Medium.otf') format('opentype');
+}
+
+body {
+
+  background-color: var(--new-blue);
+  font-family: 'PrimaryCustomFont';
+  color: white;
+}
+
+button {
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  height: 100%;
+
+}
+
+img {
+  height: 16px;
+  width: 16px;
+}
+
+textarea {
+  width: 50%;
+}
+
+.primary-btn {
+  background-color: var(--new-green);
+  color: white;
+  border-color: var(--new-green);
+  border-width: 2px;
+}
+
+.primary-btn:hover {
+  background-color: white;
+  color: var(--new-green);
+  border-color: var(--new-green);
+}

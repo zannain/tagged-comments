@@ -8,7 +8,7 @@ import { MentionDropdownComponent } from '../util/mention-dropdown/mention-dropd
 export class MentionDirective {
   @Input() items: any[] = []
   @Output() selectItem: EventEmitter<{ [key: string]: string }> = new EventEmitter();
-
+  private mentionStart: number = -1;
   private dropdownList: ComponentRef<MentionDropdownComponent> | null = null;
   constructor(private ele: ElementRef<HTMLTextAreaElement>, private readonly viewContainerRef: ViewContainerRef, private renderer: Renderer2, private componentFactoryResolver: ComponentFactoryResolver) {
   }
@@ -20,8 +20,9 @@ export class MentionDirective {
     const mentionIndex = text.lastIndexOf('@');
     if (mentionIndex > -1) {
       const query = text.substring(mentionIndex + 1);
+      this.mentionStart = mentionIndex;
       if (query.length >= 0) {
-        this.showDropdown(query, mentionIndex);
+        this.showDropdown(query);
       } else {
         this.hideDropdown();
       }
@@ -64,10 +65,10 @@ export class MentionDirective {
 
     this.hideDropdown();
   }
-  private showDropdown(query: string, mentionIndex: number): void {
+  private showDropdown(query: string): void {
     if (this.dropdownList === null) {
       const factory = this.componentFactoryResolver.resolveComponentFactory(MentionDropdownComponent);
-      this.dropdownList = this.viewContainerRef.createComponent(factory)
+      this.dropdownList = this.viewContainerRef.createComponent(factory);
       this.dropdownList.instance.data = this.items;
       this.dropdownList.instance.userSelected.subscribe((userName: string) => {
         this.selectUser(userName);
@@ -75,25 +76,56 @@ export class MentionDirective {
       this.renderer.appendChild(document.body, this.dropdownList.location.nativeElement);
     }
     this.dropdownList.instance.query = query;
-    this.updateDropdownPosition(mentionIndex)
+    this.updateDropdownPosition();
   }
+  private getCaretCoordinates(element: HTMLTextAreaElement, position: number): { top: number; left: number } {
+    const div = document.createElement('div');
+    const styles = window.getComputedStyle(element);
+    const properties = [
+      'direction', 'boxSizing', 'width', 'height', 'overflowX', 'overflowY',
+      'borderTopWidth', 'borderRightWidth', 'borderBottomWidth', 'borderLeftWidth', 'borderStyle',
+      'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft',
+      'fontStyle', 'fontVariant', 'fontWeight', 'fontStretch', 'fontSize', 'fontSizeAdjust',
+      'lineHeight', 'fontFamily', 'textAlign', 'textTransform', 'textIndent', 'textDecoration',
+      'letterSpacing', 'wordSpacing', 'tabSize'
+    ];
 
+    div.style.position = 'absolute';
+    div.style.visibility = 'hidden';
+    div.style.whiteSpace = 'pre-wrap';
 
-  private updateDropdownPosition(mentionIndex: number): void {
-    const textarea = this.ele.nativeElement as HTMLTextAreaElement;
+    properties.forEach(prop => {
+      (div.style as any)[prop] = styles.getPropertyValue(prop);
+    });
+
+    div.textContent = element.value.substring(0, position);
+    const span = document.createElement('span');
+    span.textContent = element.value.substring(position) || '.';
+    div.appendChild(span);
+
+    document.body.appendChild(div);
+    const coordinates = {
+      top: span.offsetTop + parseInt(styles.borderTopWidth) + parseInt(styles.paddingTop),
+      left: span.offsetLeft + parseInt(styles.borderLeftWidth) + parseInt(styles.paddingLeft),
+    };
+    document.body.removeChild(div);
+
+    return coordinates;
+  }
+  private updateDropdownPosition(): void {
+    if (!this.dropdownList) return;
+
+    const textarea = this.ele.nativeElement;
+    const caretCoordinates = this.getCaretCoordinates(textarea, this.mentionStart);
     const rect = textarea.getBoundingClientRect();
-    const lineHeight = 20;
+    const verticalOffset = 20;
+    const top = rect.top + window.pageYOffset + caretCoordinates.top + verticalOffset;
+    const left = rect.left + window.pageXOffset + caretCoordinates.left;
 
-    const start = textarea.value.substr(0, mentionIndex);
-    const lines = start.split('\n');
-    const offsetX = lines[lines.length - 1].length * 5;
-    const offsetY = (lines.length - 1) * lineHeight;
-
-    this.renderer.setStyle(this.dropdownList!.location.nativeElement, 'top', `${rect.top + offsetY + lineHeight + window.scrollY}px`);
-    this.renderer.setStyle(this.dropdownList!.location.nativeElement, 'left', `${rect.left + offsetX + window.scrollX}px`);
+    this.renderer.setStyle(this.dropdownList.location.nativeElement, 'position', 'absolute');
+    this.renderer.setStyle(this.dropdownList.location.nativeElement, 'top', `${top}px`);
+    this.renderer.setStyle(this.dropdownList.location.nativeElement, 'left', `${left}px`);
   }
-
-
   private hideDropdown(): void {
     if (this.dropdownList) {
       this.viewContainerRef.clear();
