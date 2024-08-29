@@ -16,9 +16,13 @@ export class MentionDropdownComponent {
     this.activeIndex = 0;
   }
   @Output() userSelected = new EventEmitter<string>();
+  @Output() closeDropdown = new EventEmitter();
   filteredData: { [key: string]: string }[] = []
   activeIndex = -1;
   selectUser(userName: string): void {
     this.userSelected.emit(userName);
+  }
+  setActiveIndex(index: number): void {
+    this.activeIndex = index;
   }
 }

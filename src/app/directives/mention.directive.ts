@@ -78,7 +78,7 @@ export class MentionDirective {
     this.dropdownList.instance.query = query;
     this.updateDropdownPosition();
   }
-  private getCaretCoordinates(element: HTMLTextAreaElement, position: number): { top: number; left: number } {
+  private calculateTextAreaPosition(element: HTMLTextAreaElement, position: number): { top: number; left: number } {
     const div = document.createElement('div');
     const styles = window.getComputedStyle(element);
     const properties = [
@@ -116,7 +116,7 @@ export class MentionDirective {
     if (!this.dropdownList) return;
 
     const textarea = this.ele.nativeElement;
-    const caretCoordinates = this.getCaretCoordinates(textarea, this.mentionStart);
+    const caretCoordinates = this.calculateTextAreaPosition(textarea, this.mentionStart);
     const rect = textarea.getBoundingClientRect();
     const verticalOffset = 20;
     const top = rect.top + window.pageYOffset + caretCoordinates.top + verticalOffset;

@@ -1,8 +1,11 @@
 <div class="dropdown">
   <div *ngFor="let user of filteredData; let i = index"
-    (click)="selectUser(user['name'])"
-     [class.active]="i === activeIndex"
-    (mouseover)="activeIndex = i">
+       [attr.id]="'user-' + i"
+       role="option"
+       [attr.aria-selected]="i === activeIndex"
+       (click)="selectUser(user['name'])"
+       [class.active]="i === activeIndex"
+       (mouseover)="setActiveIndex(i)">
     {{ user['name'] }}
       </div>
     </div>
